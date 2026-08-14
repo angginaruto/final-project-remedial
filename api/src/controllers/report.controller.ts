@@ -188,3 +188,16 @@ export const getDailyProductSalesReport = async (req: Request, res: Response) =>
     return res.status(500).json({message: "Terjadi error di internal server"})
   }
 };
+
+export const getDiscrepancyReport = async (req: Request,res: Response) => {
+  try {
+    const shifts = await prisma.shift.findMany({where: {status: "CLOSED",cashDifference: {not: 0}},
+      include: { cashier: { select: { id: true, name: true, email: true }}},
+      orderBy: { endedAt: "desc"}});
+
+    return res.status(200).json({message: "Laporan transaksi tidak sesuai berhasil diambil",data: shifts});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({message: "Terjadi error di server internal" });
+  }
+};

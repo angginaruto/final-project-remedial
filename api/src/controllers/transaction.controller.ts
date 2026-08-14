@@ -185,11 +185,11 @@ export const getTransactionHistory = async (req: Request,res: Response) => {
     const cashierId = req.user!.id;
     const skip = (page - 1) * limit;
 
-    // const startOfDay = new Date(); startOfDay.setHours(0, 0, 0, 0);
+    const startOfDay = new Date(); startOfDay.setHours(0, 0, 0, 0);
 
-    // const endOfDay = new Date(startOfDay); endOfDay.setDate(endOfDay.getDate() + 1);
+    const endOfDay = new Date(startOfDay); endOfDay.setDate(endOfDay.getDate() + 1);
 
-    const where = { cashierId} //createdAt: { gte: startOfDay, lt: endOfDay }};
+    const where = { cashierId, createdAt: { gte: startOfDay, lt: endOfDay }};
 
     const [transactions, total] = await Promise.all([ prisma.transaction.findMany({ where, include: { items: { include: {product: { select: { id: true,name: true}} }} },
         orderBy: {

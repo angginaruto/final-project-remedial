@@ -1,7 +1,6 @@
 import { type Request, type Response } from "express";
 import prisma from "../utils/prisma.js"
 import {startShiftSchema, endShiftSchema } from "../validations/shift.validation.js"
-import { tr } from "zod/locales";
 
 export const startShift = async (req:Request, res:Response) => {
     try{
