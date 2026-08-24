@@ -443,22 +443,6 @@ Color palette utama:
 
 ---
 
-# 📸 Screenshots
-
-Tambahkan screenshot aplikasi di sini.
-
-```md
-![Login Page](./screenshots/login.png)
-
-![Cashier Dashboard](./screenshots/cashier-dashboard.png)
-
-![Transaction](./screenshots/transaction.png)
-
-![Transaction History](./screenshots/transaction-history.png)
-```
-
----
-
 # 🔮 Future Improvements
 
 Beberapa pengembangan yang dapat ditambahkan:
