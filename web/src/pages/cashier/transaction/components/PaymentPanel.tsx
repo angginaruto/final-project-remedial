@@ -27,6 +27,13 @@ export function PaymentPanel({
   const change = Number(cashReceived) - preview.totalAmount;
   const isShort = cashReceived !== "" && change < 0;
 
+  // PERBAIKAN: Tipe data event diperjelas untuk TypeScript yang aman
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value;
+    const limitedValue = rawValue.slice(0, 16);
+    setCardNumber(limitedValue);
+  };
+
   return (
     <div className="pmt">
       <h2 className="pmt-title">Preview Transaksi</h2>
@@ -111,13 +118,16 @@ export function PaymentPanel({
             <input
               type="text"
               inputMode="numeric"
-              placeholder="Nomor kartu debit"
+              placeholder="0000 0000 0000 0000"
               value={cardNumber}
-              onChange={(e) => setCardNumber(e.target.value)}
+              onChange={handleChange} 
             />
           </div>
 
-          <button className="pmt-confirm-btn" onClick={onConfirmDebit}>
+          <button 
+            className="pmt-confirm-btn" 
+            onClick={onConfirmDebit}
+            disabled={cardNumber.replace(/\s/g, '').length < 16}           >
             Konfirmasi Pembayaran
           </button>
         </div>

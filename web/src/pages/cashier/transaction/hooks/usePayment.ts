@@ -65,12 +65,14 @@ export function usePayment(onPaid: () => void) {
   };
 
   const confirmDebit = async () => {
-    if (!preview) return;
+  if (!preview) return;
 
-    if (!cardNumber.trim()) {
-      alert("Masukkan nomor kartu debit");
-      return;
-    }
+  const cleanedCardNumber = cardNumber.replace(/\D/g, ""); // buang semua non-digit
+
+  if (!/^\d{16}$/.test(cleanedCardNumber)) {
+    alert("Nomor kartu harus 16 digit angka");
+    return;
+  }
 
     try {
       await transactionApi.payDebit(preview.items, cardNumber.trim());

@@ -62,7 +62,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="lg-input"
-              maxLength={20}
+              maxLength={30}
             />
           </label>
 

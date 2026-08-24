@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function ShiftReportPage() {
   const navigate = useNavigate()
+//   const confimation = () => {
+//     if(window.confirm("yakin mau kembali?")){
+//         return navigate("/admin/reports")
+//     }
+//   }
   const {
     shifts,
     loading,
@@ -19,7 +24,7 @@ export default function ShiftReportPage() {
 
   return (
     <div className="srp">
-    <button className="srp-btn srp-btn--ghost margin-bottom: 20px; " onClick={() => navigate("/admin/reports") }>Back</button>
+    <button className="srp-btn srp-btn--ghost margin-bottom: 20px; " onClick={() => {navigate("/admin/reports")}}>Back</button>
       <header className="srp-header">
         <h1 className="srp-title">Shift Report</h1>
       </header>
