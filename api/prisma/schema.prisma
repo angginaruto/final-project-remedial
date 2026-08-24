@@ -15,8 +15,12 @@ model User {
   isDeleted    Boolean       @default(false)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  createdById  Int?
+  products     Product[]     @relation("AdminProducts")
   shifts       Shift[]
   transactions Transaction[]
+  createdBy    User?         @relation("AdminCashiers", fields: [createdById], references: [id])
+  cashiers     User[]        @relation("AdminCashiers")
 }
 
 model Category {
@@ -29,17 +33,19 @@ model Category {
 }
 
 model Product {
-  id         Int               @id @default(autoincrement())
-  categoryId Int
-  name       String
-  price      Decimal           @db.Decimal(12, 2)
-  stock      Int               @default(0)
-  image      String?
-  isDeleted  Boolean           @default(false)
-  createdAt  DateTime          @default(now())
-  updatedAt  DateTime          @updatedAt
-  category   Category          @relation(fields: [categoryId], references: [id])
-  items      TransactionItem[]
+  id          Int               @id @default(autoincrement())
+  categoryId  Int
+  name        String
+  price       Decimal           @db.Decimal(12, 2)
+  stock       Int               @default(0)
+  image       String?
+  isDeleted   Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  createdById Int
+  category    Category          @relation(fields: [categoryId], references: [id])
+  createdBy   User              @relation("AdminProducts", fields: [createdById], references: [id])
+  items       TransactionItem[]
 }
 
 model Shift {

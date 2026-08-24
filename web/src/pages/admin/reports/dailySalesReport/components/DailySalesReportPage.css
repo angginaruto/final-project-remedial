@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.dsr {
+  --dsr-bg: #f6f6f3;
+  --dsr-surface: #ffffff;
+  --dsr-ink: #1c1e1b;
+  --dsr-muted: #6b6f6a;
+  --dsr-border: #e2e2dd;
+  --dsr-primary: #2f5d50;
+  --dsr-primary-dark: #244a40;
+  --dsr-accent: #c9a15a;
+  --dsr-cash: #2f5d50;
+  --dsr-debit: #c9a15a;
+
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--dsr-ink);
+  background: var(--dsr-bg);
+  min-height: 100vh;
+}
+
+/* Header */
+
+.dsr-header {
+  margin-bottom: 24px;
+}
+
+.dsr-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.dsr-title::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--dsr-accent);
+  display: inline-block;
+}
+
+/* Filter */
+
+.dsr-filter {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 18px;
+  background: var(--dsr-surface);
+  border: 1px solid var(--dsr-border);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.dsr-filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dsr-filter-field label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dsr-muted);
+}
+
+.dsr-filter-field input[type="date"] {
+  padding: 9px 10px;
+  font-size: 14px;
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--dsr-ink);
+  background: var(--dsr-bg);
+  border: 1px solid var(--dsr-border);
+  border-radius: 3px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.dsr-filter-field input[type="date"]:focus {
+  outline: none;
+  border-color: var(--dsr-primary);
+  background: var(--dsr-surface);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
+}
+
+.dsr-filter-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.dsr-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.dsr-btn:active {
+  transform: translateY(1px);
+}
+
+.dsr-btn--primary {
+  background: var(--dsr-primary);
+  color: #fff;
+}
+
+.dsr-btn--primary:hover {
+  background: var(--dsr-primary-dark);
+}
+
+.dsr-btn--ghost {
+  background: var(--dsr-surface);
+  color: var(--dsr-ink);
+  border-color: var(--dsr-border);
+}
+
+.dsr-btn--ghost:hover {
+  border-color: var(--dsr-primary);
+  color: var(--dsr-primary-dark);
+}
+
+.dsr-btn:focus-visible,
+.dsr-filter-field input:focus-visible {
+  outline: 2px solid var(--dsr-primary);
+  outline-offset: 2px;
+}
+
+/* Summary — signature element: cash/debit split bar */
+
+.dsr-summary {
+  background: var(--dsr-ink);
+  color: var(--dsr-surface);
+  border-radius: 4px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+
+.dsr-summary-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.dsr-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dsr-summary-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.dsr-summary-value {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.dsr-summary-value--accent {
+  color: var(--dsr-accent);
+}
+
+.dsr-summary-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dsr-split {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dsr-split-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.dsr-split-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--dsr-debit);
+  overflow: hidden;
+}
+
+.dsr-split-bar-cash {
+  height: 100%;
+  background: var(--dsr-cash-bar, #6fa593);
+  border-radius: 4px 0 0 4px;
+}
+
+.dsr-split-bar-cash {
+  background: linear-gradient(90deg, #6fa593, #8fc0af);
+}
+
+/* Table */
+
+.dsr-table-wrap {
+  border: 1px solid var(--dsr-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--dsr-surface);
+}
+
+.dsr table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dsr thead th {
+  text-align: left;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dsr-muted);
+  background: var(--dsr-bg);
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--dsr-ink);
+}
+
+.dsr tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--dsr-border);
+  vertical-align: middle;
+}
+
+.dsr tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dsr tbody tr:hover {
+  background: var(--dsr-bg);
+}
+
+.dsr-cell--mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.dsr-cell--date {
+  color: var(--dsr-muted);
+}
+
+.dsr-cell--sales {
+  color: var(--dsr-primary-dark);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Per-row cash/debit mini split */
+
+.dsr-row-split {
+  min-width: 160px;
+}
+
+.dsr-row-split-bar {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--dsr-debit);
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.dsr-row-split-bar-cash {
+  height: 100%;
+  background: var(--dsr-primary);
+  border-radius: 3px 0 0 3px;
+}
+
+.dsr-row-split-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--dsr-muted);
+}
+
+.dsr-row-split-debit {
+  color: #a3813f;
+}
+
+/* Empty / loading state */
+
+.dsr-state {
+  padding: 48px 14px;
+  text-align: center;
+  color: var(--dsr-muted);
+  font-size: 14px;
+  background: var(--dsr-surface);
+  border: 1px solid var(--dsr-border);
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .dsr {
+    padding: 24px 16px 40px;
+  }
+  .dsr-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .dsr-filter-actions {
+    margin-left: 0;
+  }
+  .dsr-summary-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .dsr-summary-divider {
+    display: none;
+  }
+  .dsr-table-wrap {
+    overflow-x: auto;
+  }
+  .dsr table {
+    min-width: 620px;
+  }
+}

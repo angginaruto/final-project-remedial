@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.pp {
+  --pp-bg: #f6f6f3;
+  --pp-surface: #ffffff;
+  --pp-ink: #1c1e1b;
+  --pp-muted: #6b6f6a;
+  --pp-border: #e2e2dd;
+  --pp-primary: #2f5d50;
+  --pp-primary-dark: #244a40;
+  --pp-accent: #c9a15a;
+  --pp-danger: #a8462f;
+
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--pp-ink);
+  background: var(--pp-bg);
+  min-height: 100vh;
+}
+
+/* Header */
+
+.pp-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pp-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pp-title::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--pp-accent);
+  display: inline-block;
+}
+
+.pp-count {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  color: var(--pp-muted);
+}
+
+/* Toolbar */
+
+.pp-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.pp-search {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.pp-search input[type="text"] {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--pp-ink);
+  background: var(--pp-surface);
+  border: 1px solid var(--pp-border);
+  border-radius: 3px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pp-search input[type="text"]:focus {
+  outline: none;
+  border-color: var(--pp-primary);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
+}
+
+.pp-select-wrap {
+  position: relative;
+}
+
+.pp-select-wrap select {
+  appearance: none;
+  cursor: pointer;
+  padding: 10px 32px 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--pp-ink);
+  background: var(--pp-surface);
+  border: 1px solid var(--pp-border);
+  border-radius: 3px;
+}
+
+.pp-select-wrap::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pp-muted);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+/* Buttons (kept identical to .pf-btn variants) */
+
+.pp-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.pp-btn:active {
+  transform: translateY(1px);
+}
+
+.pp-btn--primary {
+  background: var(--pp-primary);
+  color: #fff;
+}
+
+.pp-btn--primary:hover {
+  background: var(--pp-primary-dark);
+}
+
+.pp-btn--ghost {
+  background: var(--pp-surface);
+  color: var(--pp-ink);
+  border-color: var(--pp-border);
+}
+
+.pp-btn--ghost:hover {
+  border-color: var(--pp-primary);
+  color: var(--pp-primary-dark);
+}
+
+.pp-btn:focus-visible,
+.pp-search input:focus-visible,
+.pp-select-wrap select:focus-visible {
+  outline: 2px solid var(--pp-primary);
+  outline-offset: 2px;
+}
+
+/* Modal */
+
+.pp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 30, 27, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 20px;
+  overflow-y: auto;
+  z-index: 50;
+  animation: pp-fade-in 0.15s ease;
+}
+
+.pp-modal {
+  width: 100%;
+  max-width: 560px;
+  animation: pp-modal-in 0.18s ease;
+}
+
+@keyframes pp-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pp-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-modal-backdrop,
+  .pp-modal {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .pp {
+    padding: 24px 16px 40px;
+  }
+  .pp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .pp-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pp-modal-backdrop {
+    padding: 24px 12px;
+  }
+}

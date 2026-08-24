@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import "./AdminLayout.css";
 
 export default function AdminLayout() {
   const navigate = useNavigate();
@@ -11,38 +12,55 @@ export default function AdminLayout() {
   };
 
   return (
-    <div>
-      <aside>
-        <h2>Cashier App</h2>
+    <div className="al">
+      <aside className="al-sidebar">
+        <h2 className="al-brand">Cashier App</h2>
 
-        <nav>
-          <NavLink to="/admin">
+        <nav className="al-nav">
+          <NavLink
+            to="/admin"
+            end
+            className={({ isActive }) =>
+              isActive ? "al-nav-link al-nav-link--active" : "al-nav-link"
+            }
+          >
             Dashboard
           </NavLink>
 
-          <NavLink to="/admin/products">
+          <NavLink
+            to="/admin/products"
+            className={({ isActive }) =>
+              isActive ? "al-nav-link al-nav-link--active" : "al-nav-link"
+            }
+          >
             Products
           </NavLink>
 
-          <NavLink to="/admin/categories">
-            Categories
-          </NavLink>
-
-          <NavLink to="/admin/cashiers">
+          <NavLink
+            to="/admin/cashiers"
+            className={({ isActive }) =>
+              isActive ? "al-nav-link al-nav-link--active" : "al-nav-link"
+            }
+          >
             Cashiers
           </NavLink>
 
-          <NavLink to="/admin/reports">
+          <NavLink
+            to="/admin/reports"
+            className={({ isActive }) =>
+              isActive ? "al-nav-link al-nav-link--active" : "al-nav-link"
+            }
+          >
             Reports
           </NavLink>
         </nav>
 
-        <button onClick={handleLogout}>
+        <button onClick={handleLogout} className="al-logout-btn">
           Logout
         </button>
       </aside>
 
-      <main>
+      <main className="al-content">
         <Outlet />
       </main>
     </div>

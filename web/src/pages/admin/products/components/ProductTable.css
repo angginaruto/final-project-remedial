@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.pt {
+  --pt-bg: #f6f6f3;
+  --pt-surface: #ffffff;
+  --pt-ink: #1c1e1b;
+  --pt-muted: #6b6f6a;
+  --pt-border: #e2e2dd;
+  --pt-primary: #2f5d50;
+  --pt-primary-dark: #244a40;
+  --pt-accent: #c9a15a;
+  --pt-danger: #a8462f;
+
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--pt-ink);
+}
+
+.pt-table-wrap {
+  border: 1px solid var(--pt-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--pt-surface);
+}
+
+.pt table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.pt thead th {
+  text-align: left;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pt-muted);
+  background: var(--pt-bg);
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--pt-ink);
+}
+
+.pt tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--pt-border);
+  vertical-align: middle;
+}
+
+.pt tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pt tbody tr {
+  transition: background 0.12s ease;
+}
+
+.pt tbody tr:hover {
+  background: var(--pt-bg);
+}
+
+/* ID, Harga, Stock read like ledger entries — same signature as the form */
+.pt-cell--mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+}
+
+.pt-cell--id {
+  color: var(--pt-muted);
+  font-size: 13px;
+}
+
+.pt-cell--price {
+  color: var(--pt-primary-dark);
+  font-weight: 600;
+}
+
+.pt-cell--name {
+  font-weight: 600;
+}
+
+.pt-thumb {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--pt-border);
+  display: block;
+}
+
+.pt-thumb-empty {
+  width: 42px;
+  height: 42px;
+  border-radius: 3px;
+  border: 1px dashed var(--pt-border);
+  color: var(--pt-muted);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pt-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.pt-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.pt-action-btn:active {
+  transform: translateY(1px);
+}
+
+.pt-action-btn--edit {
+  background: rgba(47, 93, 80, 0.08);
+  color: var(--pt-primary-dark);
+  border-color: rgba(47, 93, 80, 0.18);
+}
+
+.pt-action-btn--edit:hover {
+  background: var(--pt-primary);
+  color: #fff;
+  border-color: var(--pt-primary);
+}
+
+.pt-action-btn--danger {
+  background: rgba(168, 70, 47, 0.08);
+  color: var(--pt-danger);
+  border-color: rgba(168, 70, 47, 0.18);
+}
+
+.pt-action-btn--danger:hover {
+  background: var(--pt-danger);
+  color: #fff;
+  border-color: var(--pt-danger);
+}
+
+.pt-empty {
+  padding: 40px 14px;
+  text-align: center;
+  color: var(--pt-muted);
+  font-size: 14px;
+}
+
+.pt-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.pt-page-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 3px;
+  border: 1px solid var(--pt-ink);
+  background: var(--pt-surface);
+  color: var(--pt-ink);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.pt-page-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.pt-page-btn:hover:not(:disabled) {
+  background: var(--pt-ink);
+  color: var(--pt-surface);
+}
+
+.pt-page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: var(--pt-border);
+  color: var(--pt-muted);
+}
+
+.pt-page-btn svg {
+  flex-shrink: 0;
+}
+
+.pt-page-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  color: var(--pt-muted);
+}
+
+.pt-action-btn:focus-visible,
+.pt-page-btn:focus-visible {
+  outline: 2px solid var(--pt-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .pt-table-wrap {
+    overflow-x: auto;
+  }
+  .pt table {
+    min-width: 640px;
+  }
+}

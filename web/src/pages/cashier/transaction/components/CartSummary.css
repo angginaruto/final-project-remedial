@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.cs {
+  --cs-bg: #f6f6f3;
+  --cs-surface: #ffffff;
+  --cs-ink: #1c1e1b;
+  --cs-muted: #6b6f6a;
+  --cs-border: #e2e2dd;
+  --cs-primary: #2f5d50;
+  --cs-primary-dark: #244a40;
+  --cs-accent: #c9a15a;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 640px;
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--cs-ink);
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Header */
+
+.cs-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--cs-border);
+  flex-shrink: 0;
+}
+
+.cs-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0;
+}
+
+.cs-count {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--cs-muted);
+}
+
+/* Empty state */
+
+.cs-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--cs-muted);
+  padding: 40px 20px;
+}
+
+.cs-empty-icon {
+  color: var(--cs-border);
+}
+
+.cs-empty p {
+  margin: 0;
+  font-size: 13.5px;
+}
+
+/* Item list */
+
+.cs-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.cs-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--cs-border);
+}
+
+.cs-item:last-child {
+  border-bottom: none;
+}
+
+.cs-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cs-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cs-item-price {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--cs-muted);
+}
+
+/* Quantity stepper — signature control of this panel */
+
+.cs-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cs-bg);
+  border: 1px solid var(--cs-border);
+  border-radius: 20px;
+  padding: 3px;
+}
+
+.cs-stepper-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: var(--cs-surface);
+  color: var(--cs-primary-dark);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(28, 30, 27, 0.08);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.cs-stepper-btn:hover {
+  background: var(--cs-primary);
+  color: #fff;
+}
+
+.cs-stepper-btn:active {
+  transform: scale(0.92);
+}
+
+.cs-stepper-qty {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 13px;
+  min-width: 16px;
+  text-align: center;
+}
+
+.cs-item-subtotal {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--cs-ink);
+  white-space: nowrap;
+}
+
+/* Footer */
+
+.cs-footer {
+  flex-shrink: 0;
+  padding: 16px 18px;
+  border-top: 1px solid var(--cs-border);
+  background: var(--cs-surface);
+}
+
+.cs-total-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--cs-muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cs-total-value {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cs-ink);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.cs-checkout-btn {
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 18px;
+  border-radius: 4px;
+  border: none;
+  background: var(--cs-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.cs-checkout-btn:hover {
+  background: var(--cs-primary-dark);
+}
+
+.cs-checkout-btn:active {
+  transform: translateY(1px);
+}
+
+.cs-checkout-btn:focus-visible,
+.cs-stepper-btn:focus-visible {
+  outline: 2px solid var(--cs-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .cs {
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .cs-item {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  .cs-item-subtotal {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+}

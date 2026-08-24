@@ -1,15 +1,16 @@
-import { Router } from "express"
-import { Role } from "@prisma/client"
-import { getCategories, getCategoriesById, createCategory, updateCategory, deleteCategory} from "../controllers/category.controller.js"
-import { authenticate } from "../middlewares/auth.middleware.js"
-import { authorize } from "../middlewares/role.middleware.js"
+import {Router} from "express";
+import {Role} from "@prisma/client"
+import { authenticate } from "../middlewares/auth.middleware.js";
+import { authorize } from "../middlewares/role.middleware.js";
+import { getCategories, createCategory, getCategoriesById, updateCategory, deleteCategory } from "../controllers/category.controller.js";
+import { upload } from "../utils/multer.js"
 
 const router = Router()
 
-router.get("/", authenticate, authorize(Role.CASHIER, Role.ADMIN), getCategories)
+router.post("/", authenticate, authorize(Role.ADMIN),  upload.single("image"), createCategory)
+router.get("/", authenticate, authorize(Role.ADMIN, Role.CASHIER), getCategories)
 router.get("/:id", authenticate, authorize(Role.ADMIN, Role.CASHIER), getCategoriesById)
-router.post("/", authenticate, authorize(Role.ADMIN) ,createCategory)
-router.patch("/:id", authenticate, authorize(Role.ADMIN), updateCategory)
+router.patch("/:id", authenticate, authorize(Role.ADMIN),  upload.single("image"), updateCategory)
 router.delete("/:id", authenticate, authorize(Role.ADMIN), deleteCategory)
 
 export default router;

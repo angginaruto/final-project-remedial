@@ -1,0 +1,357 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+.cd {
+  --cd-bg: #f6f6f3;
+  --cd-surface: #ffffff;
+  --cd-ink: #1c1e1b;
+  --cd-muted: #6b6f6a;
+  --cd-border: #e2e2dd;
+  --cd-primary: #2f5d50;
+  --cd-primary-dark: #244a40;
+  --cd-accent: #c9a15a;
+  --cd-danger: #a8462f;
+
+  display: flex;
+  justify-content: center;
+
+  min-height: 100vh;
+  padding: 56px 24px;
+
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--cd-ink);
+  background: var(--cd-bg);
+}
+
+.cd-inner {
+  width: 100%;
+  max-width: 480px;
+}
+.cd-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--cd-muted);
+  font-size: 14px;
+}
+/* Header */
+
+.cd-header {
+  margin-bottom: 24px;
+}
+
+.cd-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cd-accent);
+  margin-bottom: 8px;
+}
+
+.cd-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Card */
+
+.cd-card {
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.cd-card-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0;
+  color: var(--cd-ink);
+}
+
+.cd-card-hint {
+  font-size: 13px;
+  color: var(--cd-muted);
+  margin: 6px 0 18px;
+  line-height: 1.5;
+}
+
+.cd-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+/* Status pill */
+
+.cd-status {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cd-status--open {
+  background: rgba(47, 93, 80, 0.1);
+  color: var(--cd-primary-dark);
+}
+
+.cd-status--open::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cd-primary);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.18);
+}
+
+/* Shift info */
+
+.cd-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: var(--cd-bg);
+  border: 1px solid var(--cd-border);
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.cd-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cd-info-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--cd-muted);
+}
+
+.cd-info-value {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--cd-ink);
+}
+
+.cd-info-value--sm {
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+/* Fields */
+
+.cd-field {
+  margin-bottom: 16px;
+}
+
+.cd-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--cd-muted);
+  margin-bottom: 6px;
+}
+
+.cd-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  font-size: 16px;
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--cd-ink);
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  border-radius: 3px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cd-field input:focus {
+  outline: none;
+  border-color: var(--cd-primary);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
+}
+
+/* Buttons */
+
+.cd-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cd-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 12px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.cd-btn:active {
+  transform: translateY(1px);
+}
+
+.cd-btn--block {
+  width: 100%;
+}
+
+.cd-btn--primary {
+  background: var(--cd-primary);
+  color: #fff;
+}
+
+.cd-btn--primary:hover {
+  background: var(--cd-primary-dark);
+}
+
+.cd-btn--ghost {
+  background: var(--cd-surface);
+  color: var(--cd-ink);
+  border-color: var(--cd-border);
+}
+
+.cd-btn--ghost:hover {
+  border-color: var(--cd-primary);
+  color: var(--cd-primary-dark);
+}
+
+.cd-btn--danger-ghost {
+  background: transparent;
+  color: var(--cd-danger);
+  border-color: transparent;
+}
+
+.cd-btn--danger-ghost:hover {
+  background: rgba(168, 70, 47, 0.08);
+  border-color: rgba(168, 70, 47, 0.2);
+}
+
+.cd-btn:focus-visible,
+.cd-field input:focus-visible {
+  outline: 2px solid var(--cd-primary);
+  outline-offset: 2px;
+}
+
+/* End-shift modal */
+
+.cd-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 30, 27, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+  animation: cd-fade-in 0.15s ease;
+}
+
+.cd-modal {
+  width: 100%;
+  max-width: 380px;
+  background: var(--cd-surface);
+  border-radius: 6px;
+  padding: 24px;
+  animation: cd-modal-in 0.18s ease;
+}
+
+.cd-modal-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0;
+}
+
+.cd-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+.cd-logout-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  color: var(--cd-danger);
+  background: transparent;
+
+  border: 1px solid rgba(168, 70, 47, 0.25);
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.cd-logout-btn:hover {
+  margin-top: 10px;
+  color: #fff;
+  background: var(--cd-danger);
+  border-color: var(--cd-danger);
+}
+
+.cd-logout-btn:focus-visible {
+  outline: 2px solid var(--cd-primary);
+  outline-offset: 2px;
+}
+@keyframes cd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cd-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cd-modal-backdrop,
+  .cd-modal {
+    animation: none;
+  }
+}
+@media (max-width: 420px) {
+  .cd {
+    padding: 32px 16px;
+  }
+}

@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.lg {
+  --lg-bg: #f6f6f3;
+  --lg-surface: #ffffff;
+  --lg-ink: #1c1e1b;
+  --lg-muted: #6b6f6a;
+  --lg-border: #e2e2dd;
+  --lg-primary: #2f5d50;
+  --lg-primary-dark: #244a40;
+  --lg-accent: #c9a15a;
+  --lg-danger: #a8462f;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+  padding: 24px;
+
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--lg-ink);
+  background: var(--lg-bg);
+}
+
+/* Card */
+
+.lg-card {
+  width: 100%;
+  max-width: 380px;
+
+  padding: 32px 28px;
+
+  background: var(--lg-surface);
+
+  border: 1px solid var(--lg-border);
+  border-radius: 6px;
+}
+
+.lg-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--lg-accent);
+}
+
+.lg-title {
+  margin: 0 0 24px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+
+  color: var(--lg-ink);
+}
+
+/* Form */
+
+.lg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lg-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  color: var(--lg-muted);
+}
+
+.lg-input {
+  padding: 10px 12px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+
+  color: var(--lg-ink);
+  background: var(--lg-bg);
+
+  border: 1px solid var(--lg-border);
+  border-radius: 4px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.lg-input::placeholder {
+  color: var(--lg-muted);
+  font-family: "Inter", sans-serif;
+}
+
+.lg-input:focus {
+  background: var(--lg-surface);
+  border-color: var(--lg-primary);
+}
+
+/* Error */
+
+.lg-error {
+  margin: 0;
+  padding: 9px 12px;
+
+  font-size: 12.5px;
+  color: var(--lg-danger);
+
+  background: rgba(168, 70, 47, 0.08);
+  border: 1px solid rgba(168, 70, 47, 0.22);
+  border-radius: 4px;
+}
+
+/* Button */
+
+.lg-button {
+  margin-top: 4px;
+  padding: 11px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+
+  color: #fff;
+  background: var(--lg-primary);
+
+  border: 1px solid var(--lg-primary);
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.lg-button:hover {
+  background: var(--lg-primary-dark);
+  border-color: var(--lg-primary-dark);
+}
+
+/* Accessibility */
+
+.lg-input:focus-visible,
+.lg-button:focus-visible {
+  outline: 2px solid var(--lg-primary);
+  outline-offset: 2px;
+}
+
+/* Mobile */
+
+@media (max-width: 420px) {
+  .lg-card {
+    padding: 26px 20px;
+  }
+}

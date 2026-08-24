@@ -2,31 +2,38 @@ import { type Request, type Response } from "express";
 import prisma from "../utils/prisma.js"
 import {startShiftSchema, endShiftSchema } from "../validations/shift.validation.js"
 
-export const startShift = async (req:Request, res:Response) => {
-    try{
+export const startShift = async (req: Request, res: Response) => {
+    try {
         const validation = startShiftSchema.safeParse(req.body)
-        if(!validation.success){return res.status(400).json({message : "error di validasi", errors: validation.error.flatten()})}
-        
-        const {initialCash} = validation.data
-        
-        if(!req.user){return res.status(401).json({message : "user tidak terotorisasi"})}
+        if (!validation.success) { return res.status(400).json({ message: "error di validasi", errors: validation.error.flatten() }) }
+
+        const { initialCash } = validation.data
+        if (!req.user) { return res.status(401).json({ message: "user tidak terotorisasi" }) }
         const cashierId = req.user.id
 
-        const existingShift = await prisma.shift.findFirst({
-            where : {cashierId, status : "OPEN"}
+        const shift = await prisma.$transaction(async (tx) => {
+            const existingShift = await tx.shift.findFirst({
+                where: { cashierId, status: "OPEN" }
+            })
+
+            if (existingShift) {
+                throw new Error("SHIFT_ALREADY_OPEN")
+            }
+
+            return tx.shift.create({ data: { cashierId, initialCash, status: "OPEN" } })
         })
 
-        if(existingShift){return res.status(409).json({message : "anda masih punya shift yang sedang berjalan"})}
-
-        const shift = await prisma.shift.create({data : {cashierId, initialCash, status:"OPEN"}})
-
-        return res.status(200).json({message : "Shift berhasil dimulai", data : shift})
-    }catch(error){
+        return res.status(200).json({ message: "Shift berhasil dimulai", data: shift })
+    } catch (error) {
         console.error(error)
-        return res.status(500).json({message : "terjadi error di server internal"})
+
+        if (error instanceof Error && error.message === "SHIFT_ALREADY_OPEN") {
+            return res.status(409).json({ message: "anda masih punya shift yang sedang berjalan" })
+        }
+
+        return res.status(500).json({ message: "terjadi error di server internal" })
     }
 }
-
 export const getCurrentShift = async (req:Request, res:Response) => {
     try {
         if(!req.user){return res.status(401).json({message : "user tidak terotorisasi"})}

@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.rp {
+  --rp-bg: #f6f6f3;
+  --rp-surface: #ffffff;
+  --rp-ink: #1c1e1b;
+  --rp-muted: #6b6f6a;
+  --rp-border: #e2e2dd;
+  --rp-primary: #2f5d50;
+  --rp-primary-dark: #244a40;
+  --rp-accent: #c9a15a;
+
+  padding: 40px;
+
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--rp-ink);
+  background: var(--rp-bg);
+
+  min-height: 100vh;
+}
+
+.rp-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.rp-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--rp-accent);
+}
+
+.rp-title {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+
+  color: var(--rp-ink);
+}
+
+.rp-subtitle {
+  margin: 8px 0 28px;
+
+  font-size: 14px;
+  color: var(--rp-muted);
+}
+
+/* Grid */
+
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Card */
+
+.rp-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 22px 20px;
+
+  text-align: left;
+
+  background: var(--rp-surface);
+
+  border: 1px solid var(--rp-border);
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.rp-card:hover {
+  border-color: var(--rp-primary);
+  box-shadow: 0 4px 14px rgba(28, 30, 27, 0.06);
+  transform: translateY(-1px);
+}
+
+.rp-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  margin-bottom: 16px;
+
+  color: var(--rp-primary-dark);
+  background: var(--rp-bg);
+
+  border-radius: 8px;
+}
+
+.rp-card-title {
+  margin: 0 0 4px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+
+  color: var(--rp-ink);
+}
+
+.rp-card-desc {
+  margin: 0;
+
+  font-size: 12.5px;
+  color: var(--rp-muted);
+}
+
+.rp-card-arrow {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+
+  font-size: 18px;
+  color: var(--rp-muted);
+
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.rp-card:hover .rp-card-arrow {
+  color: var(--rp-primary);
+  transform: translateX(2px);
+}
+
+/* Accessibility */
+
+.rp-card:focus-visible {
+  outline: 2px solid var(--rp-primary);
+  outline-offset: 2px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .rp {
+    padding: 24px 18px;
+  }
+
+  .rp-grid {
+    grid-template-columns: 1fr;
+  }
+}

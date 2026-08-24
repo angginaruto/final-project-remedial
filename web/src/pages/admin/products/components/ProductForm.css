@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.pf {
+  --pf-bg: #f6f6f3;
+  --pf-surface: #ffffff;
+  --pf-ink: #1c1e1b;
+  --pf-muted: #6b6f6a;
+  --pf-border: #e2e2dd;
+  --pf-primary: #2f5d50;
+  --pf-primary-dark: #244a40;
+  --pf-accent: #c9a15a;
+  --pf-danger: #a8462f;
+
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 4px;
+  color: var(--pf-ink);
+  font-family: "Inter", -apple-system, sans-serif;
+}
+
+.pf-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin: 0 0 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--pf-ink);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pf-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pf-accent);
+  display: inline-block;
+}
+
+.pf-field {
+  margin-bottom: 18px;
+}
+
+.pf-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+  margin-bottom: 6px;
+}
+
+.pf-field input[type="text"],
+.pf-field input[type="number"],
+.pf-field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--pf-ink);
+  background: var(--pf-bg);
+  border: 1px solid var(--pf-border);
+  border-radius: 3px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pf-field input[type="text"]:focus,
+.pf-field input[type="number"]:focus,
+.pf-field select:focus {
+  outline: none;
+  border-color: var(--pf-primary);
+  background: var(--pf-surface);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
+}
+
+/* Numeric fields get a ledger/tag treatment — this is the form's signature */
+.pf-field--numeric input {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.pf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.pf-select-wrap {
+  position: relative;
+}
+
+.pf-select-wrap::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pf-muted);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+.pf-field select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.pf-image-zone {
+  border: 1.5px dashed var(--pf-border);
+  border-radius: 4px;
+  padding: 16px;
+  background: var(--pf-bg);
+}
+
+.pf-swatch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pf-swatch img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--pf-border);
+  flex-shrink: 0;
+}
+
+.pf-swatch-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+
+.pf-image-zone input[type="file"] {
+  font-size: 13px;
+  color: var(--pf-muted);
+  width: 100%;
+}
+
+.pf-image-zone input[type="file"]::file-selector-button {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 7px 12px;
+  margin-right: 10px;
+  border: 1px solid var(--pf-ink);
+  border-radius: 3px;
+  background: var(--pf-surface);
+  color: var(--pf-ink);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pf-image-zone input[type="file"]::file-selector-button:hover {
+  background: var(--pf-ink);
+  color: var(--pf-surface);
+}
+
+.pf-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--pf-border);
+}
+
+.pf-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.pf-btn:active {
+  transform: translateY(1px);
+}
+
+.pf-btn--primary {
+  background: var(--pf-primary);
+  color: #fff;
+  flex: 1;
+}
+
+.pf-btn--primary:hover {
+  background: var(--pf-primary-dark);
+}
+
+.pf-btn--ghost {
+  background: transparent;
+  color: var(--pf-muted);
+  border-color: var(--pf-border);
+}
+
+.pf-btn--ghost:hover {
+  border-color: var(--pf-danger);
+  color: var(--pf-danger);
+}
+
+.pf-btn:focus-visible,
+.pf-field input:focus-visible,
+.pf-field select:focus-visible {
+  outline: 2px solid var(--pf-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .pf {
+    padding: 20px;
+    border-radius: 0;
+  }
+  .pf-row {
+    grid-template-columns: 1fr;
+  }
+}

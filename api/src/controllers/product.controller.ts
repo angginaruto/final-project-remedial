@@ -1,142 +1,156 @@
-import {type Request, type Response} from "express";
-import prisma from "../utils/prisma.js"
-import { createProductSchema } from "../validations/product.validation.js";
-import { getProductsSchema } from "../validations/product.validation.js";
-import { updateProductSchema, deleteConfirmationSchema } from "../validations/product.validation.js";
+import { type Request, type Response } from "express";
+import { createProductSchema, getProductsSchema, updateProductSchema, deleteConfirmationSchema } from "../validations/product.validation.js";
+import { getOwnerAdminId } from "../utils/ownersship.js";
+import {
+  createProductService,
+  getProductsService,
+  getProductByIdService,
+  updateProductService,
+  deleteProductService,
+  ProductNotFoundError,
+  ProductConflictError,
+} from "../services/product.service.js";
 
-export const createProduct = async (req : Request, res : Response) => {
-    try {
-        const validation = createProductSchema.safeParse(req.body)
-
-        if(!validation.success){return res.status(400).json({ message : "error di validasi data product", errors : validation.error.flatten()})}
-
-        const {name, price, stock, categoryId} = validation.data
-
-        const category = await prisma.category.findUnique({ where : { id : categoryId, }})
-
-        if(!category || category.isDeleted){ return res.status(404).json({ message : "kategori tidak ditemukan"})}
-
-        const existingProduct = await prisma.product.findFirst({ where : {name}})
-
-        if(existingProduct){ 
-            if(!existingProduct.isDeleted){return res.status(409).json({ message : "nama produk sudah ada"})}
-            const restoreProduct = await prisma.product.update({where : {id : existingProduct.id}, data : {isDeleted : false}})
-            return res.status(200).json({message : "produk berhasil dipulihkan", data : restoreProduct})
-        }
-        const product = await prisma.product.create({ data : {name, price, stock, categoryId} })
-
-        return res.status(201).json({ message : "Produk berhasil dibuat!", data : product})
-    } catch(error){
-        console.error(error)
-        return res.status(500).json({ message : "server internal sedang ada masalah"})
+export const createProduct = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(400).json({ message: "akun belum terotorisasi" });
     }
-}
 
-export const getProducts = async (req : Request, res : Response) => {
-    try {
-        const validation = getProductsSchema.safeParse(req.query)
+    const validation = createProductSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({ message: "error di validasi data product", errors: validation.error.flatten() });
+    }
 
-        if(!validation.success){ return res.status(400).json({ message : "query parameternya tidak valid", errors : validation.error.flatten()})}
+    const result = await createProductService(req.user.id, validation.data, req.file?.buffer);
 
-       const { search, categoryId, page, limit} = validation.data;
+    if (result.restored) {
+      return res.status(200).json({ message: "produk berhasil dipulihkan", data: result.product });
+    }
 
-    const skip = (page - 1) * limit;
-
-    const where = { isDeleted: false, ...(search? { name: { contains: search, mode: "insensitive" as const, }, } : {}),
-        ...(categoryId? { categoryId,} : {}),
-    };
-
-    const [products, total] = await Promise.all([ prisma.product.findMany({ where,
-        include: { category: true,}, orderBy: { createdAt: "desc",}, skip, take: limit, }),
-        prisma.product.count({ where,}),
-    ]);
-
-    return res.status(200).json({ message: "Produk berhasil diambil",data: products,
-      pagination: { page, limit, total, totalPages: Math.ceil(total / limit), },});
+    return res.status(201).json({ message: "Produk berhasil dibuat!", data: result.product });
   } catch (error) {
-    console.error(error);
+    if (error instanceof ProductNotFoundError) {
+      return res.status(404).json({ message: error.message });
+    }
 
-    return res.status(500).json({
-      message: "Internal server error",
-    });
+    if (error instanceof ProductConflictError) {
+      return res.status(409).json({ message: error.message });
+    }
+
+    console.error(error);
+    return res.status(500).json({ message: "server internal sedang ada masalah" });
   }
 };
 
-export const getProductsById = async (req : Request, res : Response) => {
-    try {
-        const id = Number(req.params.id)
-
-        if(!Number.isInteger(id) || id <= 0) { return res.status(400).json({ message : "id tidak valid"})}
-
-        const product = await prisma.product.findFirst({ 
-            where : {id, isDeleted:false}, include: {category:true}
-        })
-
-        if(!product){
-            return res.status(404).json({ message : "produk tidak ditemukan"})
-        }
-
-        return res.status(200).json({ message : "produk berhasil diambil", data : product})
-    }catch(error){
-        console.error(error)
-        return res.status(500).json({ message : "server internal sedang error"})
+export const getProducts = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "user tidak terotorisasi" });
     }
-}
 
-export const updateProduct = async (req : Request, res : Response) => {
-    try {
-        const id = Number(req.params.id)
-
-        if(!Number.isInteger(id) || id <= 0) { return res.status(400).json({ message : "id tidak valid"})}
-
-        const validation = updateProductSchema.safeParse(req.body)
-
-        if(!validation.success) {return res.status(400).json( {message : "validasi error", errors : validation.error.flatten()})}
-
-        const data = validation.data
-
-        const existingProduct = await prisma.product.findFirst({ where : {id, isDeleted : false}})
-
-        if(!existingProduct){ return res.status(404).json({ message : "produk tidakk ditemukan"})}
-
-        if(data.categoryId !== undefined){
-            const category = await prisma.category.findFirst({ where : {id : data.categoryId, isDeleted : false}})
-            if (!category){ return res.status(404).json({ message : "kategori tidak ditemukan"})}
-        }
-
-        const updateProduct = await prisma.product.update({
-            where : {id}, data : {
-                ...(data.name !== undefined && {name : data.name}),
-                ...(data.price !== undefined && {price : data.price}),
-                ...(data.stock !== undefined && {stock : data.stock}),
-                ...(data.categoryId !== undefined && {categoryId : data.categoryId})
-            }, 
-            include : { category : true}
-        })
-
-        return res.status(200).json({ message : "produk berhasil diupdate", data : updateProduct})
-    }catch(error){
-        console.error(error)
-
-        return res.status(500).json({ message : "server internal sedang error"})
+    const ownerAdminId = await getOwnerAdminId(req.user);
+    if (!ownerAdminId) {
+      return res.status(403).json({ message: "akun tidak terhubung ke admin manapun" });
     }
-}
 
-export const deleteProduct = async (req : Request, res : Response) => {
-    try{
-        const id = Number(req.params.id)
-        if(!Number.isInteger(id) || id <= 0){return res.status(400).json({message : "id-nya tidak valid"})}
-
-        const product = await prisma.product.findFirst({where : {id, isDeleted:false}})
-        if(!product){ return res.status(404).json({message : "produk tidak ditemukan"})}
-        
-        const validation = deleteConfirmationSchema.safeParse(req.body)
-        if(!validation.success){return res.status(400).json({message : "perlu konfirmasi sebelum delere", errors : validation.error.flatten()})}
-
-        await prisma.product.update({where : {id}, data : {isDeleted : true}})
-        return res.status(200).json({message : "produk berhasil dihapus"})
-    }catch(error){
-        console.error(error)
-        return res.status(500).json({message : "terjadi error di server internal"})
+    const validation = getProductsSchema.safeParse(req.query);
+    if (!validation.success) {
+      return res.status(400).json({ message: "query parameternya tidak valid", errors: validation.error.flatten() });
     }
-}
+
+    const { products, pagination } = await getProductsService(ownerAdminId, validation.data);
+
+    return res.status(200).json({ message: "Produk berhasil diambil", data: products, pagination });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getProductsById = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "user tidak terotorisasi" });
+    }
+
+    const ownerAdminId = await getOwnerAdminId(req.user);
+    if (!ownerAdminId) {
+      return res.status(403).json({ message: "akun tidak terhubung ke admin manapun" });
+    }
+
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      return res.status(400).json({ message: "id tidak valid" });
+    }
+
+    const product = await getProductByIdService(ownerAdminId, id);
+
+    return res.status(200).json({ message: "produk berhasil diambil", data: product });
+  } catch (error) {
+    if (error instanceof ProductNotFoundError) {
+      return res.status(404).json({ message: error.message });
+    }
+
+    console.error(error);
+    return res.status(500).json({ message: "server internal sedang error" });
+  }
+};
+
+export const updateProduct = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "user tidak terotorisasi" });
+    }
+
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      return res.status(400).json({ message: "id tidak valid" });
+    }
+
+    const validation = updateProductSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({ message: "validasi error", errors: validation.error.flatten() });
+    }
+
+    const updatedProduct = await updateProductService(req.user.id, id, validation.data, req.file?.buffer);
+
+    return res.status(200).json({ message: "produk berhasil diupdate", data: updatedProduct });
+  } catch (error) {
+    if (error instanceof ProductNotFoundError) {
+      return res.status(404).json({ message: error.message });
+    }
+
+    console.error(error);
+    return res.status(500).json({ message: "server internal sedang error" });
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "user tidak terotorisasi" });
+    }
+
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      return res.status(400).json({ message: "id-nya tidak valid" });
+    }
+
+    const validation = deleteConfirmationSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({ message: "perlu konfirmasi sebelum delere", errors: validation.error.flatten() });
+    }
+
+    await deleteProductService(req.user.id, id);
+
+    return res.status(200).json({ message: "produk berhasil dihapus" });
+  } catch (error) {
+    if (error instanceof ProductNotFoundError) {
+      return res.status(404).json({ message: error.message });
+    }
+
+    console.error(error);
+    return res.status(500).json({ message: "terjadi error di server internal" });
+  }
+};

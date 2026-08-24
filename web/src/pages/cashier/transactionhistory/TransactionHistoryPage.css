@@ -1,0 +1,659 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.th {
+  --th-bg: #f6f6f3;
+  --th-surface: #ffffff;
+  --th-ink: #1c1e1b;
+  --th-muted: #6b6f6a;
+  --th-border: #e2e2dd;
+  --th-primary: #2f5d50;
+  --th-primary-dark: #244a40;
+  --th-accent: #c9a15a;
+  --th-danger: #a8462f;
+
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--th-ink);
+  background: var(--th-bg);
+
+  min-height: 100vh;
+}
+
+/* Back button */
+
+.th-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 11px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--th-muted);
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.th-back-btn:hover {
+  color: var(--th-primary);
+  border-color: var(--th-border);
+  background: var(--th-surface);
+}
+
+/* Header */
+
+.th-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin: 28px 0 24px;
+}
+
+.th-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: var(--th-accent);
+}
+
+.th-title {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+
+  color: var(--th-ink);
+}
+
+.th-count {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--th-muted);
+}
+
+/* Table */
+
+.th-table-wrap {
+  width: 100%;
+
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  background: var(--th-surface);
+}
+
+.th-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 14px;
+}
+
+.th-table thead th {
+  padding: 12px 14px;
+
+  text-align: left;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--th-muted);
+  background: var(--th-bg);
+
+  border-bottom: 2px solid var(--th-ink);
+}
+
+.th-table tbody td {
+  padding: 13px 14px;
+
+  vertical-align: middle;
+
+  border-bottom: 1px solid var(--th-border);
+}
+
+.th-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.th-table tbody tr {
+  transition: background 0.12s ease;
+}
+
+.th-table tbody tr:hover {
+  background: var(--th-bg);
+}
+
+/* Cells */
+
+.th-cell--mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.th-cell--id {
+  font-size: 12px;
+  color: var(--th-muted);
+}
+
+.th-cell--date {
+  font-size: 13px;
+  color: var(--th-muted);
+}
+
+.th-cell--total {
+  color: var(--th-primary-dark);
+  font-weight: 600;
+}
+
+/* Payment */
+
+.th-payment {
+  display: inline-block;
+
+  padding: 4px 8px;
+
+  border-radius: 3px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+}
+
+.th-payment--cash {
+  color: var(--th-primary-dark);
+  background: rgba(47, 93, 80, 0.08);
+  border: 1px solid rgba(47, 93, 80, 0.18);
+}
+
+.th-payment--debit {
+  color: #66552c;
+  background: rgba(201, 161, 90, 0.12);
+  border: 1px solid rgba(201, 161, 90, 0.25);
+}
+
+/* Items */
+
+.th-items {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.th-item {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.th-item-name {
+  font-weight: 500;
+}
+
+.th-item-qty {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  color: var(--th-muted);
+}
+
+/* Detail button */
+
+.th-detail-btn {
+  padding: 6px 11px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+  color: var(--th-primary-dark);
+  background: rgba(47, 93, 80, 0.08);
+
+  border: 1px solid rgba(47, 93, 80, 0.18);
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.th-detail-btn:hover {
+  color: #fff;
+  background: var(--th-primary);
+  border-color: var(--th-primary);
+}
+
+/* Empty */
+
+.th-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 180px;
+
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+
+  background: var(--th-surface);
+}
+
+.th-empty p {
+  margin: 0;
+
+  font-size: 14px;
+  color: var(--th-muted);
+}
+
+/* Modal */
+
+.th-modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(28, 30, 27, 0.45);
+
+  z-index: 50;
+
+  animation: th-fade-in 0.15s ease;
+}
+
+.th-modal {
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  background: var(--th-surface);
+
+  border: 1px solid var(--th-border);
+  border-radius: 6px;
+
+  animation: th-modal-in 0.18s ease;
+}
+
+/* Modal header */
+
+.th-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 22px 24px;
+
+  border-bottom: 1px solid var(--th-border);
+}
+
+.th-modal-title {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+
+  color: var(--th-ink);
+}
+
+.th-close-btn {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--th-border);
+  border-radius: 3px;
+
+  background: var(--th-surface);
+  color: var(--th-muted);
+
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.th-close-btn:hover {
+  color: var(--th-danger);
+  border-color: var(--th-danger);
+}
+
+/* Modal info */
+
+.th-modal-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  margin: 20px 24px 0;
+  padding: 14px 16px;
+
+  background: var(--th-bg);
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+}
+
+.th-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.th-info-item span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  color: var(--th-muted);
+}
+
+.th-info-item strong {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+
+  color: var(--th-ink);
+}
+
+/* Detail section */
+
+.th-detail-section {
+  padding: 22px 24px;
+}
+
+.th-section-title {
+  margin: 0 0 12px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+
+  color: var(--th-ink);
+}
+
+.th-detail-items {
+  border-top: 1px solid var(--th-border);
+}
+
+.th-detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid var(--th-border);
+}
+
+.th-detail-product {
+  margin: 0 0 4px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: var(--th-ink);
+}
+
+.th-detail-quantity {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+
+  color: var(--th-muted);
+}
+
+.th-detail-subtotal {
+  flex-shrink: 0;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+
+  color: var(--th-primary-dark);
+}
+
+/* Total */
+
+.th-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0 24px;
+  padding: 16px 0;
+
+  border-top: 2px solid var(--th-ink);
+  border-bottom: 1px solid var(--th-border);
+}
+
+.th-total span {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+}
+
+.th-total strong {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+
+  color: var(--th-primary-dark);
+}
+
+/* Payment information */
+
+.th-payment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin: 18px 24px 0;
+  padding: 14px 16px;
+
+  background: var(--th-bg);
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+}
+
+.th-payment-info div,
+.th-card-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.th-payment-info span,
+.th-card-info span {
+  font-size: 12px;
+  color: var(--th-muted);
+}
+
+.th-payment-info strong,
+.th-card-info strong {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--th-ink);
+}
+
+/* Debit card */
+
+.th-card-info {
+  margin: 18px 24px 0;
+  padding: 14px 16px;
+
+  background: var(--th-bg);
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+}
+
+/* Modal footer */
+
+.th-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  padding: 16px 24px;
+
+  border-top: 1px solid var(--th-border);
+}
+
+.th-close-modal-btn {
+  padding: 9px 16px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--th-ink);
+  background: var(--th-surface);
+
+  border: 1px solid var(--th-border);
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.th-close-modal-btn:hover {
+  color: var(--th-primary);
+  border-color: var(--th-primary);
+}
+
+/* Animation */
+
+@keyframes th-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes th-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility */
+
+.th-detail-btn:focus-visible,
+.th-back-btn:focus-visible,
+.th-close-btn:focus-visible,
+.th-close-modal-btn:focus-visible {
+  outline: 2px solid var(--th-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-modal-backdrop,
+  .th-modal {
+    animation: none;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .th {
+    padding: 28px 16px 40px;
+  }
+
+  .th-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .th-table-wrap {
+    overflow-x: auto;
+  }
+
+  .th-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 480px) {
+  .th-modal-info {
+    grid-template-columns: 1fr;
+  }
+
+  .th-modal-header {
+    padding: 18px;
+  }
+
+  .th-modal-info,
+  .th-detail-section,
+  .th-payment-info,
+  .th-card-info {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .th-total {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .th-modal-footer {
+    padding: 14px 18px;
+  }
+}

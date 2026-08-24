@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+.ct {
+  --ct-bg: #f6f6f3;
+  --ct-surface: #ffffff;
+  --ct-ink: #1c1e1b;
+  --ct-muted: #6b6f6a;
+  --ct-border: #e2e2dd;
+  --ct-primary: #2f5d50;
+  --ct-primary-dark: #244a40;
+  --ct-accent: #c9a15a;
+  --ct-danger: #a8462f;
+
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Inter", -apple-system, sans-serif;
+  color: var(--ct-ink);
+}
+
+.ct-table-wrap {
+  border: 1px solid var(--ct-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ct-surface);
+}
+
+.ct table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.ct thead th {
+  text-align: left;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ct-muted);
+  background: var(--ct-bg);
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--ct-ink);
+}
+
+.ct tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ct-border);
+  vertical-align: middle;
+}
+
+.ct tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ct tbody tr {
+  transition: background 0.12s ease;
+}
+
+.ct tbody tr:hover {
+  background: var(--ct-bg);
+}
+
+/* ID / Date */
+
+.ct-cell--mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 500;
+}
+
+.ct-cell--id {
+  color: var(--ct-muted);
+  font-size: 13px;
+}
+
+.ct-cell--date {
+  color: var(--ct-muted);
+  font-size: 12px;
+}
+
+.ct-cell--name {
+  font-weight: 600;
+}
+
+/* Role */
+
+.ct-role {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+
+  color: var(--ct-primary-dark);
+  background: rgba(47, 93, 80, 0.08);
+  border: 1px solid rgba(47, 93, 80, 0.18);
+
+  text-transform: uppercase;
+}
+
+/* Actions */
+
+.ct-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ct-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+
+  padding: 6px 11px;
+  border-radius: 3px;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.ct-action-btn:active {
+  transform: translateY(1px);
+}
+
+.ct-action-btn--edit {
+  background: rgba(47, 93, 80, 0.08);
+  color: var(--ct-primary-dark);
+  border-color: rgba(47, 93, 80, 0.18);
+}
+
+.ct-action-btn--edit:hover {
+  background: var(--ct-primary);
+  color: #fff;
+  border-color: var(--ct-primary);
+}
+
+.ct-action-btn--danger {
+  background: rgba(168, 70, 47, 0.08);
+  color: var(--ct-danger);
+  border-color: rgba(168, 70, 47, 0.18);
+}
+
+.ct-action-btn--danger:hover {
+  background: var(--ct-danger);
+  color: #fff;
+  border-color: var(--ct-danger);
+}
+
+/* Empty */
+
+.ct-empty {
+  padding: 40px 14px;
+  text-align: center;
+  color: var(--ct-muted);
+  font-size: 14px;
+}
+
+/* Pagination */
+
+.ct-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.ct-page-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+
+  padding: 8px 16px;
+
+  border-radius: 3px;
+  border: 1px solid var(--ct-ink);
+
+  background: var(--ct-surface);
+  color: var(--ct-ink);
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.ct-page-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.ct-page-btn:hover:not(:disabled) {
+  background: var(--ct-ink);
+  color: var(--ct-surface);
+}
+
+.ct-page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: var(--ct-border);
+  color: var(--ct-muted);
+}
+
+.ct-page-btn svg {
+  flex-shrink: 0;
+}
+
+.ct-page-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  color: var(--ct-muted);
+}
+
+/* Focus */
+
+.ct-action-btn:focus-visible,
+.ct-page-btn:focus-visible {
+  outline: 2px solid var(--ct-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .ct-table-wrap {
+    overflow-x: auto;
+  }
+
+  .ct table {
+    min-width: 640px;
+  }
+}

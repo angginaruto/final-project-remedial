@@ -1,0 +1,177 @@
+/* Cashier Form */
+
+.cf {
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+/* Header */
+
+.cf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--cp-border);
+  background: #fafaf8;
+}
+
+.cf-title {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--cp-ink);
+}
+
+.cf-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cp-accent);
+}
+
+/* Body */
+
+.cf-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cf-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cp-ink);
+}
+
+.cf-field input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: var(--cp-ink);
+
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: 3px;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.cf-field input::placeholder {
+  color: #9a9d98;
+}
+
+.cf-field input:hover {
+  border-color: #c9cbc5;
+}
+
+.cf-field input:focus {
+  outline: none;
+  border-color: var(--cp-primary);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
+}
+
+.cf-hint {
+  font-size: 12px;
+  color: var(--cp-muted);
+  line-height: 1.4;
+}
+
+/* Footer */
+
+.cf-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+
+  padding: 16px 22px;
+
+  border-top: 1px solid var(--cp-border);
+  background: #fafaf8;
+}
+
+/* Buttons */
+
+.cf-btn {
+  padding: 9px 16px;
+
+  border-radius: 3px;
+  border: 1px solid transparent;
+
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.cf-btn:active {
+  transform: translateY(1px);
+}
+
+.cf-btn--primary {
+  background: var(--cp-primary);
+  color: #fff;
+}
+
+.cf-btn--primary:hover {
+  background: var(--cp-primary-dark);
+}
+
+.cf-btn--secondary {
+  background: var(--cp-surface);
+  color: var(--cp-ink);
+  border-color: var(--cp-border);
+}
+
+.cf-btn--secondary:hover {
+  border-color: var(--cp-primary);
+  color: var(--cp-primary-dark);
+}
+
+.cf-btn:focus-visible {
+  outline: 2px solid var(--cp-primary);
+  outline-offset: 2px;
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .cf-header {
+    padding: 18px;
+  }
+
+  .cf-body {
+    padding: 18px;
+  }
+
+  .cf-footer {
+    padding: 14px 18px;
+  }
+
+  .cf-footer .cf-btn {
+    flex: 1;
+  }
+}

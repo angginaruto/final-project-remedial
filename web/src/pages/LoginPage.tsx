@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import "./LoginPage.css";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +25,11 @@ export default function LoginPage() {
       });
 
       const { token, user } = response.data.data;
+      
+      if (!EMAIL_REGEX.test(email)) {
+        setError("Format email tidak valid");
+      return;
+      }
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", user.role);
@@ -40,32 +48,44 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="lg">
+      <div className="lg-card">
+        <span className="lg-eyebrow">Selamat Datang</span>
+        <h1 className="lg-title">Login</h1>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <form onSubmit={handleLogin} className="lg-form">
+          <label className="lg-field">
+            <span className="lg-label">Email</span>
+            <input
+              type="email"
+              placeholder="nama@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="lg-input"
+              maxLength={20}
+            />
+          </label>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
-        />
+          <label className="lg-field">
+            <span className="lg-label">Password</span>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+              className="lg-input"
+            />
+          </label>
 
-        {error && <p>{error}</p>}
+          {error && <p className="lg-error">{error}</p>}
 
-        <button type="submit">
-          Login
-        </button>
-      </form>
+          <button type="submit" className="lg-button">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
